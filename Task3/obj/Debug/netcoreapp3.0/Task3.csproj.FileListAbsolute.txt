@@ -1,0 +1,11 @@
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.exe
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.deps.json
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.runtimeconfig.json
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.runtimeconfig.dev.json
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.dll
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\bin\Debug\netcoreapp3.0\Task3.pdb
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\obj\Debug\netcoreapp3.0\Task3.csprojAssemblyReference.cache
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\obj\Debug\netcoreapp3.0\Task3.AssemblyInfoInputs.cache
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\obj\Debug\netcoreapp3.0\Task3.AssemblyInfo.cs
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\obj\Debug\netcoreapp3.0\Task3.dll
+C:\Users\Ислана\OneDrive\Документы\Прочее\Hackaton\Remote\Edits\Task3\obj\Debug\netcoreapp3.0\Task3.pdb
