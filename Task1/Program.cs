@@ -2,48 +2,51 @@
 
 namespace Task1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            while (true)
+            Console.WriteLine("Введите стороны треугольника:");
+            double SideA = GetTriangleSide();
+            double SideB = GetTriangleSide();
+            double SideC = GetTriangleSide();
+            if (SideA + SideB >= SideC && 
+                SideA + SideC >= SideB && 
+                SideB + SideC >= SideA)
             {
-                try
+                if (SideA == SideB && SideA == SideC)
                 {
-                    Console.WriteLine("Введите стороны треугольника:");
-                    double a = int.Parse(Console.ReadLine());
-                    double b = int.Parse(Console.ReadLine());
-                    double c = int.Parse(Console.ReadLine());
-                    if (a + b >= c && a + c >= b && b + c >= a)
-                    {
-                        if (a == b && a == c)
-                        {
-                            Console.WriteLine("Треугольник равносторонний!");
-                        }
-                        else if (a + b == c || a + c == b || b + c == a)
-                        {
-                            Console.WriteLine("Треугольник вырожденный!(оказывается и такой бывает ^_^)");
-                        }
-                        else if (a == b || b == c || a == c)
-                        {
-                            Console.WriteLine("Треугольник равнобедренный!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Треугольник разносторонний!");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Треугольник не существует!");
-                    }
-
+                    Console.WriteLine("Треугольник равносторонний.");
                 }
-                catch (FormatException e)
+                else if (SideA + SideB == SideC || SideA + SideC == SideB || SideB + SideC == SideA)
                 {
-                    Console.WriteLine("Ошибка:" + e.Message);
+                    Console.WriteLine("Треугольник вырожденный.");
+                }
+                else if (SideA == SideB || SideB == SideC || SideA == SideC)
+                {
+                    Console.WriteLine("Треугольник равнобедренный.");
+                }
+                else
+                {
+                    Console.WriteLine("Треугольник разносторонний.");
                 }
             }
+            else
+            {
+                Console.WriteLine("Такого треугольника не существует!");
+            }
+            Console.ReadKey();
         }
+
+        private static double GetTriangleSide()
+        {
+            double sideLength = 0;
+            while (!double.TryParse(Console.ReadLine(),out sideLength) || sideLength<=0)
+            {
+                Console.WriteLine("Неверный формат! Повторите попытку!");
+            }
+            return sideLength;
+        }
+
     }
 }
