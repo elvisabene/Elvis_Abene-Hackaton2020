@@ -2,17 +2,18 @@
 
 namespace Task4
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             int length = GetArrayLength();
-            int[] array = ArrayWithRandomNumbers(length);
+            int[] array = GetRandomArray(length);
             PrintArrayWithMessage(array, "Исходный массив:");
-            PrintArrayWithMessage(BubbleSort(array), "Массив после сортировки:");
+            PrintArrayWithMessage(SortArray(array), "Массив после сортировки:");
             Console.ReadKey();
         }
-        static int[] ArrayWithRandomNumbers(int length)
+
+        private static int[] GetRandomArray(int length)
         {
             int[] array = new int[length];
             Random random = new Random();
@@ -22,7 +23,8 @@ namespace Task4
             }
             return array;
         }
-        static void PrintArrayWithMessage(int[] array, string message)
+
+        private static void PrintArrayWithMessage(int[] array, string message)
         {
             Console.WriteLine("\n" + message + "\n");
             foreach (int element in array)
@@ -30,7 +32,8 @@ namespace Task4
                 Console.Write(element + " ");
             }
         }
-        static int GetArrayLength()
+
+        private static int GetArrayLength()
         {
             Console.WriteLine("Введите размер массива:");
             int number;
@@ -40,11 +43,12 @@ namespace Task4
             }
             return number;
         }
-        static int [] BubbleSort(int [] array)
+
+        private static int[] SortArray(int[] array)
         {
-            for (int i = 0; i<array.Length-1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                for (int j = i+1; j<array.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
                     if (array[i] > array[j])
                     {
