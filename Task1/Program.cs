@@ -7,22 +7,22 @@ namespace Task1
         private static void Main(string[] args)
         {
             Console.WriteLine("Введите стороны треугольника:");
-            double SideA = GetTriangleSide();
-            double SideB = GetTriangleSide();
-            double SideC = GetTriangleSide();
-            if (SideA + SideB >= SideC && 
-                SideA + SideC >= SideB && 
-                SideB + SideC >= SideA)
+            double firstSide = GetTriangleSide();
+            double secondSide = GetTriangleSide();
+            double thirdSide = GetTriangleSide();
+            if (firstSide + secondSide >= thirdSide &&
+                firstSide + thirdSide >= secondSide &&
+                secondSide + thirdSide >= firstSide)
             {
-                if (SideA == SideB && SideA == SideC)
+                if (firstSide == secondSide && firstSide == thirdSide)
                 {
                     Console.WriteLine("Треугольник равносторонний.");
                 }
-                else if (SideA + SideB == SideC || SideA + SideC == SideB || SideB + SideC == SideA)
+                else if (firstSide + secondSide == thirdSide || firstSide + thirdSide == secondSide || secondSide + thirdSide == firstSide)
                 {
                     Console.WriteLine("Треугольник вырожденный.");
                 }
-                else if (SideA == SideB || SideB == SideC || SideA == SideC)
+                else if (firstSide == secondSide || secondSide == thirdSide || firstSide == thirdSide)
                 {
                     Console.WriteLine("Треугольник равнобедренный.");
                 }
