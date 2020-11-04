@@ -2,15 +2,20 @@
 
 namespace Task3
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Введите размер массива:");
-            int length = GetArrayLength();
-            int[] array = ArrayFromUser(length);
-            int newIndex = GetIndexOfNewElement(length);
-            int newElement = GetValueOfNewElement();
+            string errorMessage = "Неверный символ! Повторите попытку! Возможно размер массива слишком мал.";
+            int length = GetNumber("Lenght", errorMessage, 0);
+            int[] array = GetArray(length);
+            Console.WriteLine("Введите индекс нового элемента:");
+            errorMessage = "Неверный символ! Повторите попытку! Возможно индекс отрицательный или индекс выходит за границы массива.";
+            int newIndex = GetNumber("Index", errorMessage, length);
+            Console.WriteLine("Введите значение нового элемента:");
+            errorMessage = "Неверный символ! Повторите попытку!";
+            int newElement = GetNumber("NewElement", errorMessage, 0);
             string message = "Исходный массив:";
             PrintArrayWithMessage(array, message);
             InsertNewElementInArray(newIndex, newElement, array);
@@ -18,49 +23,60 @@ namespace Task3
             PrintArrayWithMessage(array, message);
             Console.ReadLine();
         }
-        static int GetArrayLength()
+
+        private static int GetNumber(string subtype, string errorMessage, int arrayLength)
         {
-            int number;
-            while (!int.TryParse(Console.ReadLine(), out number) || number < 1)
+            int number = 0;
+            while (true)
             {
-                Console.WriteLine("Неверный символ! Повторите попытку! Возможно размер массива слишком мал.");
+                while (!int.TryParse(Console.ReadLine(), out number))
+                {
+                    Console.WriteLine(errorMessage);
+                }
+                switch (subtype)
+                {
+                    case "Lenght":
+                        {
+                            if (number > 0)
+                            {
+                                return number;
+                            }
+                            else
+                            {
+                                Console.WriteLine(errorMessage);
+                                break;
+                            }
+                        }
+                    case "Index":
+                        if (number >= 0 && number <= arrayLength - 1)
+                        {
+                            return number;
+                        }
+                        else
+                        {
+                            Console.WriteLine(errorMessage);
+                            break;
+                        }
+                    default:
+                        {
+                            return number;
+                        }
+                }
             }
-            return number;
         }
-        static int[] ArrayFromUser(int length)
+
+        private static int[] GetArray(int length)
         {
             int[] array = new int[length];
             for (int i = 0; i < length - 1; i++)
             {
                 Console.WriteLine($"Введите {i + 1}-й элемент");
-                while (!int.TryParse(Console.ReadLine(), out array[i]))
-                {
-                    Console.WriteLine("Неверный формат! Повторите попытку!");
-                }
+                array[i] = GetNumber("", "Неверный формат! Повторите попытку!", 0);
             }
             return array;
         }
-        static int GetIndexOfNewElement(int length)
-        {
-            Console.WriteLine("Введите индекс нового элемента:");
-            int index = 0;
-            while (!int.TryParse(Console.ReadLine(), out index) || index < 0 || index > length - 1)
-            {
-                Console.WriteLine("Неверный символ! Повторите попытку! Возможно индекс отрицательный или индекс выходит за границы массива.");
-            }
-            return index;
-        }
-        static int GetValueOfNewElement()
-        {
-            Console.WriteLine("Введите значение нового элемента:");
-            int value = 0;
-            while (!int.TryParse(Console.ReadLine(), out value))
-            {
-                Console.WriteLine("Неверный формат! Повторите попытку!");
-            }
-            return value;
-        }
-        static void PrintArrayWithMessage(int[] array, string message)
+
+        private static void PrintArrayWithMessage(int[] array, string message)
         {
             Console.WriteLine(message + "\n");
             foreach (int element in array)
@@ -68,7 +84,8 @@ namespace Task3
                 Console.Write(element + " ");
             }
         }
-        static void InsertNewElementInArray(int newindex, int newelement, int[] array)
+
+        private static void InsertNewElementInArray(int newindex, int newelement, int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
