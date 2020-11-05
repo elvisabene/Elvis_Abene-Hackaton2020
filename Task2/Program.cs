@@ -8,12 +8,12 @@ namespace Task2
         {
             Console.WriteLine("Для ввода массива с клавитуры нажмите                  \"1\"\n" +
                               "Для заполнения массива случайными числами нажмите      \"2\"");
-
-            int result = GetNumber("Number1or2", out int number, "Неверный символ! Повторите попытку! Введите символ 1 или 2!");
+            int result = GetNumber("Number1or2", "Неверный символ! Повторите попытку! Введите символ 1 или 2!");
             Console.WriteLine("Введите размер массива:");
-            int length = GetNumber("Length", out number, "Неверный символ! Повторите попытку! Возможно размер массива слишком мал.");
+            int length = GetNumber("Length", "Неверный символ! Повторите попытку! Возможно размер массива слишком мал.");
+            const int confirmInput = 1;
             int[] array;
-            if (result == 1)
+            if (result == confirmInput)
             {
                 array = InputArray(length);
             }
@@ -21,8 +21,7 @@ namespace Task2
             {
                 array = GetRandomArray(length);
             }
-            string message = "Исходный массив:";
-            PrintArrayWithMessage(array, message);
+            PrintArray(array);
             Console.WriteLine(GetResult(array));
             Console.ReadKey();
         }
@@ -33,23 +32,27 @@ namespace Task2
             for (int i = 0; i < length; i++)
             {
                 Console.WriteLine($"Введите {i + 1}-й элемент");
-                array[i] = GetNumber("", out int number, "Неверный формат! Повторите попытку!");
+                array[i] = GetNumber("", "Неверный формат! Повторите попытку!");
             }
             return array;
         }
 
-        private static int GetNumber(string subtype, out int number, string errorMessage)
+        private static int GetNumber(string subtype, string errorMessage)
         {
+            int number = 0;
+            //int minRandomValue = 0;
             while (true)
             {
                 while (!int.TryParse(Console.ReadLine(), out number))
                 {
                     Console.WriteLine(errorMessage);
                 }
+                const int confirmInput = 1;
+                const int confirmRandomGeneration = 2;
                 switch (subtype)
                 {
                     case "Number1or2":
-                        if (number == 1 || number == 2)
+                        if (number == confirmInput || number == confirmRandomGeneration)
                         {
                             return number;
                         }
@@ -76,18 +79,28 @@ namespace Task2
 
         private static int[] GetRandomArray(int length)
         {
+            Console.WriteLine("Введите минимальное возможное число в массиве:");
+            int minRandomValue = GetNumber("MinRandomValue", "Неверный формат! Повторите попытку!");
+            //int maxRandomValue = 0;
+            Console.WriteLine("Введите максимальное возможное число в массиве:");
+            int maxRandomValue = GetNumber("MaxRandomValue", "Неверный формат! Повторите попытку!");
+            while (maxRandomValue < minRandomValue)
+            {
+                Console.WriteLine("Максимальное число не может быть меньше минимального! Повторите попытку!");
+                maxRandomValue = GetNumber("MaxRandomValue", "Неверный формат! Повторите попытку!");
+            }
             int[] array = new int[length];
             Random random = new Random();
             for (int i = 0; i < length; i++)
             {
-                array[i] = random.Next(-10, 10);
+                array[i] = random.Next(minRandomValue, maxRandomValue + 1);
             }
             return array;
         }
 
-        private static void PrintArrayWithMessage(int[] array, string message)
+        private static void PrintArray(int[] array)
         {
-            Console.WriteLine(message + "\n");
+            Console.WriteLine("Исходный массив:");
             foreach (int element in array)
             {
                 Console.Write(element + " ");
