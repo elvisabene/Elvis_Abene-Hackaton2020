@@ -13,7 +13,7 @@ namespace Remove_duplicate_words
             Console.ReadKey();
         }
 
-        private static StringBuilder RemoveDuplicateWords(string text)
+        private static string RemoveDuplicateWords(string text)
         {
             string[] words = text.Split(".,!?-:; ".ToCharArray());
             int length = words.Length;
@@ -51,7 +51,7 @@ namespace Remove_duplicate_words
                     textWithoutDuplicateWords.Append($"{words[i]} ");
                 }
             }
-            return textWithoutDuplicateWords;
+            return textWithoutDuplicateWords.ToString();
         }
     }
 }
