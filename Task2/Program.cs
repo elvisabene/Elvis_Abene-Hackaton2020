@@ -40,7 +40,6 @@ namespace Task2
         private static int GetNumber(string subtype, string errorMessage)
         {
             int number = 0;
-            //int minRandomValue = 0;
             while (true)
             {
                 while (!int.TryParse(Console.ReadLine(), out number))
@@ -80,10 +79,9 @@ namespace Task2
         private static int[] GetRandomArray(int length)
         {
             Console.WriteLine("Введите минимальное возможное число в массиве:");
-            int minRandomValue = GetNumber("MinRandomValue", "Неверный формат! Повторите попытку!");
-            //int maxRandomValue = 0;
+            int minRandomValue = GetNumber("", "Неверный формат! Повторите попытку!");
             Console.WriteLine("Введите максимальное возможное число в массиве:");
-            int maxRandomValue = GetNumber("MaxRandomValue", "Неверный формат! Повторите попытку!");
+            int maxRandomValue = GetNumber("", "Неверный формат! Повторите попытку!");
             while (maxRandomValue < minRandomValue)
             {
                 Console.WriteLine("Максимальное число не может быть меньше минимального! Повторите попытку!");
