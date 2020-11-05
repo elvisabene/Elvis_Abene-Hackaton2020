@@ -10,6 +10,7 @@ namespace Switch_Statement
             Console.WriteLine(GetType(ob));
             Console.ReadKey();
         }
+
         private static string GetType(object arg)
         {
             const string String = "String";
