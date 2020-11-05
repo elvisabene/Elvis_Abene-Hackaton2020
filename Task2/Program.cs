@@ -161,6 +161,5 @@ namespace Task2
             }
             return array;
         }
-
     }
 }
