@@ -6,15 +6,18 @@ namespace Darts
     {
         private static void Main(string[] args)
         {
-            double x = GetCoordinate("x");
-            double y = GetCoordinate("y");
+            string Coord = "x";
+            Console.WriteLine($"Введите координату {Coord} точки попадания:");
+            double x = GetCoordinate();
+            Coord = "y";
+            Console.WriteLine($"Введите координату {Coord} точки попадания:");
+            double y = GetCoordinate();
             Console.WriteLine($"Ваш результат: {GetResult(x, y)}.");
             Console.ReadKey();
         }
 
-        private static double GetCoordinate(string coordinate)
+        private static double GetCoordinate()
         {
-            Console.WriteLine($"Введите координату {coordinate} точки попадания:");
             double number = 0;
             while (!double.TryParse(Console.ReadLine(), out number))
             {
