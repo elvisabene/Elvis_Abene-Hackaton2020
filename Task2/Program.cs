@@ -40,7 +40,6 @@ namespace Task2
         private static int GetNumber(string subtype, string errorMessage)
         {
             int number = 0;
-            //int minRandomValue = 0;
             while (true)
             {
                 while (!int.TryParse(Console.ReadLine(), out number))
