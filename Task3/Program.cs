@@ -6,25 +6,30 @@ namespace Task3
     {
         private static void Main(string[] args)
         {
+            const string incorrectFormat = "Неверный символ! Повторите попытку! ";
+            const string incorrectLength = "Возможно размер массива слишком мал.";
+            const string incorrectIndex = "Возможно индекс отрицательный или индекс выходит за границы массива.";
             Console.WriteLine("Введите размер массива:");
-            string errorMessage = "Неверный символ! Повторите попытку! Возможно размер массива слишком мал.";
-            int length = GetNumber("Lenght", errorMessage, 0);
-            int[] array = GetArray(length);
+            int length = GetNumber("Lenght", incorrectFormat + incorrectLength);
+            int[] array = GetArray(length, incorrectFormat);
             Console.WriteLine("Введите индекс нового элемента:");
-            errorMessage = "Неверный символ! Повторите попытку! Возможно индекс отрицательный или индекс выходит за границы массива.";
-            int newIndex = GetNumber("Index", errorMessage, length);
+            int newIndex = GetNumber("Index", incorrectFormat + incorrectIndex);
+            while (newIndex < 0 || newIndex > length - 1)
+            {
+                Console.WriteLine(incorrectIndex);
+                newIndex = GetNumber("Index", incorrectFormat + incorrectIndex);
+            }
             Console.WriteLine("Введите значение нового элемента:");
-            errorMessage = "Неверный символ! Повторите попытку!";
-            int newElement = GetNumber("NewElement", errorMessage, 0);
+            int newElement = GetNumber("NewElement", incorrectFormat);
             string message = "Исходный массив:";
             PrintArrayWithMessage(array, message);
             InsertNewElementInArray(newIndex, newElement, array);
-            message = "\nМассив после вставки элемента";
+            message = "\nМассив после вставки элемента:";
             PrintArrayWithMessage(array, message);
             Console.ReadLine();
         }
 
-        private static int GetNumber(string subtype, string errorMessage, int arrayLength)
+        private static int GetNumber(string subtype, string errorMessage)
         {
             int number = 0;
             while (true)
@@ -47,16 +52,6 @@ namespace Task3
                                 break;
                             }
                         }
-                    case "Index":
-                        if (number >= 0 && number <= arrayLength - 1)
-                        {
-                            return number;
-                        }
-                        else
-                        {
-                            Console.WriteLine(errorMessage);
-                            break;
-                        }
                     default:
                         {
                             return number;
@@ -65,20 +60,20 @@ namespace Task3
             }
         }
 
-        private static int[] GetArray(int length)
+        private static int[] GetArray(int length, string errorMessage)
         {
             int[] array = new int[length];
             for (int i = 0; i < length - 1; i++)
             {
                 Console.WriteLine($"Введите {i + 1}-й элемент");
-                array[i] = GetNumber("", "Неверный формат! Повторите попытку!", 0);
+                array[i] = GetNumber("", errorMessage);
             }
             return array;
         }
 
         private static void PrintArrayWithMessage(int[] array, string message)
         {
-            Console.WriteLine(message + "\n");
+            Console.WriteLine(message);
             foreach (int element in array)
             {
                 Console.Write(element + " ");
