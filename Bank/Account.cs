@@ -24,22 +24,4 @@ namespace Bank
         [DataMember]
         public List<Card> CardList { get; set; }
     }
-
-    [DataContract]
-    internal class CreditAccount : Account
-    {
-        [DataMember]
-        public int CreditSum { get; set; } = 0;
-        public CreditAccount()
-        {
-        }
-    }
-
-    [DataContract]
-    internal class DebitAccount : Account
-    {
-        public DebitAccount()
-        {
-        }
-    }
 }
