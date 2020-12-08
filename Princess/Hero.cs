@@ -72,6 +72,7 @@ namespace Princess
             topPosition += (int)Step.Down;
             MoveHero();
         }
+
         private void MoveUp()
         {
             topPosition += (int)Step.Up;

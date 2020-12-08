@@ -103,7 +103,6 @@ namespace Princess
                     default:
                         Console.WriteLine(" -- Неверный ввод! Введите 1 или 2.");
                         break;
-
                 }
             }
         }

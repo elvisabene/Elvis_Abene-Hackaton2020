@@ -15,16 +15,18 @@ namespace Princess
 
         public Field()
         {
-            GetBombs();
+            FillBombCollection();
             GenerateField();
         }
-        private void GetBombs()
+
+        private void FillBombCollection()
         {
             for (int i = 0; i < 10; i++)
             {
                 bombCollection[i] = bomb;
             }
         }
+
         private void GenerateField()
         {
             Random randomSetBomb = new Random();
