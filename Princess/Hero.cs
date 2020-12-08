@@ -23,9 +23,9 @@ namespace Princess
             SetStartPosition(2, 1);
         }
 
-        public void Move(ConsoleKey key)
+        public void GetMove(ConsoleKey key)
         {
-            switch(key)
+            switch (key)
             {
                 case ConsoleKey.LeftArrow:
                     {
@@ -49,7 +49,7 @@ namespace Princess
                     }
                 default:
                     {
-                        Action();
+                        MoveHero();
                         break;
                     }
             }
@@ -58,27 +58,27 @@ namespace Princess
         private void MoveRight()
         {
             leftPosition += (int)Step.Right;
-            Action();
+            MoveHero();
         }
 
         private void MoveLeft()
         {
             leftPosition += (int)Step.Left;
-            Action();
+            MoveHero();
         }
 
         private void MoveDown()
         {
             topPosition += (int)Step.Down;
-            Action();
+            MoveHero();
         }
         private void MoveUp()
         {
             topPosition += (int)Step.Up;
-            Action();
+            MoveHero();
         }
 
-        private void Action()
+        private void MoveHero()
         {
             CheckBoarder();
             Console.SetCursorPosition(leftPosition, topPosition);
@@ -87,10 +87,7 @@ namespace Princess
             Console.Write(charModel);
             Console.ResetColor();
             Console.SetCursorPosition(leftPosition, topPosition);
-            if (MeetPrincess())
-            {
-                Game.Win();
-            }
+            Game.CheckGameCondition(HP);
         }
 
         private void CheckBoarder()
@@ -99,7 +96,7 @@ namespace Princess
             {
                 topPosition += (int)Step.Down;
             }
-            else if(topPosition == 11)
+            else if (topPosition == 11)
             {
                 topPosition += (int)Step.Up;
             }
@@ -120,7 +117,7 @@ namespace Princess
                 TakeDamage();
                 Game.field.IsBomb[topPosition, leftPosition] = false;
                 PrintHPInfo();
-                Action();
+                MoveHero();
             }
         }
 
@@ -132,7 +129,7 @@ namespace Princess
 
         private void TakeDamage()
         {
-            var randomDamage = new Random().Next(1,11);
+            var randomDamage = new Random().Next(1, 11);
             HP -= randomDamage;
             Console.SetCursorPosition(30, messageLine++);
             Console.WriteLine($"Вы наступаете на мину и получаете {randomDamage} очков урона.");
@@ -140,10 +137,7 @@ namespace Princess
             {
                 HP = 0;
                 PrintHPInfo();
-                Game.Over();
             }
         }
-
-        private bool MeetPrincess() => leftPosition == 20 && topPosition == 10 ? true : false;
     }
 }
