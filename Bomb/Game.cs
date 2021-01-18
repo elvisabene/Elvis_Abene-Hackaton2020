@@ -4,26 +4,20 @@ using System.Threading;
 
 namespace Bomb
 {
-    static class Game
+    internal static class Game
     {
-        static int time;
-        static int attempts;
-        static int gamePassword;
-        static int userPassword;
+        private static int time;
+        private static int attempts;
+        private static int gamePassword;
+        private static int userPassword;
         public static bool NewGameRequested { get; set; } = true;
 
-        static GameState gameState;
+        private static GameState gameState;
 
-        delegate void GameStateHandler();
-        static event GameStateHandler StateNotify = Notify;
+        private delegate void GameStateHandler();
+        private static event GameStateHandler StateNotify = Notify;
 
-        enum GameState
-        {
-            Win,
-            TimeOver,
-            NoAttempts,
-            Undefined
-        }
+       
 
         public static void Start()
         {
@@ -35,25 +29,25 @@ namespace Bomb
             Task.WaitAll(Task.Run(() => StartTimer()), Task.Run(() => GuessPassword()));
         }
 
-        static void ClearGameState()
+        private static void ClearGameState()
         {
             NewGameRequested = false;
             gameState = GameState.Undefined;
         }
 
-        static int GetAttempts()
+        private static int GetAttempts()
         {
             Console.Write("Введите количество попыток: ");
             return GetNaturalNumber();
         }
 
-        static int GetTime()
+        private static int GetTime()
         {
             Console.Write("Введите время таймера (в секундах): ");
             return GetNaturalNumber();
         }
 
-        static int GetRandomPassword()
+        private static int GetRandomPassword()
         {
             Console.WriteLine("Создаю случайный пароль(числа от 1 до 14)...");
             int password = new Random().Next(1, 15);
@@ -63,7 +57,7 @@ namespace Bomb
             return password;
         }
 
-        static void StartNotify()
+        private static void StartNotify()
         {
             Console.CursorVisible = false;
             PrintColorText(ConsoleColor.Blue, "Начало новой игры...");
@@ -76,7 +70,7 @@ namespace Bomb
             Console.CursorVisible = true;
         }
 
-        static void StartTimer()
+        private static void StartTimer()
         {
             for (int i = 0; i < time; i++)
             {
@@ -91,7 +85,7 @@ namespace Bomb
             StateNotify.Invoke();
         }
 
-        static void GuessPassword()
+        private static void GuessPassword()
         {
             for (int i = 0; i < attempts; i++)
             {
@@ -115,7 +109,7 @@ namespace Bomb
             SetNewGameRequestResult();
         }
 
-        static int GetNaturalNumber()
+        private static int GetNaturalNumber()
         {
             int number = 0;
             while (true)
@@ -131,7 +125,7 @@ namespace Bomb
             }
         }
 
-        static void Notify()
+        private static void Notify()
         {
             switch (gameState)
             {
@@ -155,21 +149,21 @@ namespace Bomb
             NewGameRequestMenu();
         }
 
-        static void PrintColorText(ConsoleColor color, string text)
+        private static void PrintColorText(ConsoleColor color, string text)
         {
             Console.ForegroundColor = color;
             Console.WriteLine(text);
             Console.ResetColor();
         }
 
-        static void NewGameRequestMenu()
+        private static void NewGameRequestMenu()
         {
             Console.WriteLine("Введите цифру:");
             Console.WriteLine("1, если хотите начать новую игру");
             Console.WriteLine("2, если хотите выйти из игры");
         }
 
-        static void SetNewGameRequestResult(int number = 0)
+        private static void SetNewGameRequestResult(int number = 0)
         {
             int result = number;
             while (true)
